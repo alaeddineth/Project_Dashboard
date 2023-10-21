@@ -6,6 +6,8 @@ Auth::routes(['register' => false]);
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('search', 'HomeController@search')->name('search');
 Route::resource('jobs', 'JobController')->only(['index', 'show']);
+Route::resource('projects', 'ProjectController')->only(['index', 'show']);
+
 Route::get('category/{category}', 'CategoryController@show')->name('categories.show');
 Route::get('location/{location}', 'LocationController@show')->name('locations.show');
 
@@ -39,4 +41,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Jobs
     Route::delete('jobs/destroy', 'JobsController@massDestroy')->name('jobs.massDestroy');
     Route::resource('jobs', 'JobsController');
+    //TASKS
+    Route::delete('tasks/destroy', 'TasksController@massDestroy')->name('tasks.massDestroy');
+    Route::resource('tasks', 'TasksController');
+
+    //Projects 
+        Route::delete('project/destroy', 'ProjectsController@massDestroy')->name('projects.massDestroy');
+        Route::resource('projects', 'ProjectsController');
+        Route::post('/admin/projects/{project}/update-status', [ProjectsController::class, 'updateStatus'])->name('admin.projects.updateStatus');
+
+    
+
+
 });

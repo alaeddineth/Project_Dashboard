@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Job;
+use App\Task; // Replace with the appropriate model
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreJobRequest extends FormRequest
+class StoreTaskRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('job_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('task_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -22,23 +22,18 @@ class StoreJobRequest extends FormRequest
             'title'        => [
                 'required',
             ],
-            'company_id'   => [
+            'user_id'      => [
                 'required',
                 'integer',
             ],
-            'location_id'  => [
+            'project_id'   => [
                 'required',
                 'integer',
             ],
-            'categories.*' => [
-                'integer',
-            ],
-            'categories'   => [
-                'array',
-            ],
-            'salary'       => [
+            'status'       => [
                 'required',
             ],
+            // Add any additional rules for your specific Task model
         ];
     }
 }

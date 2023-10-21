@@ -62,6 +62,22 @@
                     </a>
                 </li>
             @endcan
+           <!--Projects Management -->
+                <li class="nav-item">
+                    <a href="{{ route('admin.projects.index') }}" class="nav-link {{ request()->is('admin/locations') || request()->is('admin/locations/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-folder nav-icon"></i> <!-- Changed the icon to represent projects -->
+                        {{ trans('cruds.project.title') }}
+                    </a>
+                </li>
+
+                <!--Tasks Management -->
+                <li class="nav-item">
+                    <a href="{{ route('admin.tasks.index') }}" class="nav-link {{ request()->is('admin/locations') || request()->is('admin/locations/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-tasks nav-icon"></i> <!-- Changed the icon to represent tasks -->
+                        {{ trans('cruds.task.title') }}
+                    </a>
+                </li>
+
             @can('location_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.locations.index") }}" class="nav-link {{ request()->is('admin/locations') || request()->is('admin/locations/*') ? 'active' : '' }}">
@@ -72,6 +88,7 @@
                     </a>
                 </li>
             @endcan
+           
             @can('company_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.companies.index") }}" class="nav-link {{ request()->is('admin/companies') || request()->is('admin/companies/*') ? 'active' : '' }}">

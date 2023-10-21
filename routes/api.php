@@ -22,4 +22,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Jobs
     Route::apiResource('jobs', 'JobsApiController');
-});
+    //Tasks
+    Route::apiResource('tasks', 'TasksApiController');
+    //
+    Route::apiResource('projects','ProjectsApiController');
+
+});    
+
