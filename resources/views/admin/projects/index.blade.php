@@ -52,40 +52,40 @@
                 </thead>
                 <tbody>
                     @foreach($projects as $key => $project)
-                        <tr data-entry-id="{{ $project->id }}">
-                            <td>
+                        <tr data-entry-id="{{ $project->id }}" id="project-{{ $project->id }}">
+                                <td>
 
-                            </td>
-                            <td>
-                                {{ $project->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->titre ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->Description ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->DateDebut ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->DateFin ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->Budget ?? '' }}
-                            </td>
-                            <td>
-                                {{ $project->competences ?? '' }}
-                            </td>
-                            <td>
-    @if ($project->etat == 'pending')
-        <a href="#" style="color: blue" onclick="showConfirmationDialog({{ $project->id }})">Pending</a>
-    @elseif ($project->etat == 'accepted')
-        <span style="color: green">Accepted</span>
-    @elseif ($project->etat == 'rejected')
-        <span style="color: red">Rejected</span>
-    @endif
-</td>
+                                </td>
+                                <td>
+                                    {{ $project->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->titre ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->Description ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->DateDebut ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->DateFin ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->Budget ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $project->competences ?? '' }}
+                                </td>
+                                <td>
+        @if ($project->etat == 'pending')
+            <a href="#" style="color: blue" onclick="showConfirmationDialog({{ $project->id }})">Pending</a>
+        @elseif ($project->etat == 'accepted')
+            <span style="color: green">Accepted</span>
+        @elseif ($project->etat == 'rejected')
+            <span style="color: red">Rejected</span>
+        @endif
+    </td>
                             <td>
                                 
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.projects.show', $project->id) }}">
@@ -181,6 +181,7 @@
             if (data.success) {
                 // Update the view accordingly based on the updated status
                 updateView(status, projectId);
+               // location.reload(); // Reload the page after the update
             } else {
                 alert("Error: " + data.message); // Display error message if there was an issue with the update
             }
@@ -190,14 +191,21 @@
     }
 
     function updateView(status, projectId) {
-        const projectElement = document.querySelector(`#project-${projectId}`);
+    const projectElement = document.querySelector(`#project-${projectId} td:nth-child(9)`);
+
+    if (projectElement) {
         if (status === 'accepted') {
             projectElement.innerHTML = `<span style="color: green">Accepted</span>`;
         } else if (status === 'rejected') {
             projectElement.innerHTML = `<span style="color: red">Rejected</span>`;
         }
+    } else {
+        console.error(`Element with ID 'project-${projectId}' not found`);
     }
+}
+
 </script>
+
 
 
 

@@ -48,7 +48,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //Projects 
         Route::delete('project/destroy', 'ProjectsController@massDestroy')->name('projects.massDestroy');
         Route::resource('projects', 'ProjectsController');
-        Route::post('/admin/projects/{project}/update-status', [ProjectsController::class, 'updateStatus'])->name('admin.projects.updateStatus');
+        Route::post('projects/{project}/update-status', 'ProjectsController@updateStatus')->name('admin.projects.updateStatus');
+
 
     
 
